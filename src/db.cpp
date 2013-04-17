@@ -18,6 +18,8 @@
 #include <QSqlError>
 #include <QString>
 #include <QDate>
+#include <QApplication>
+#include <QDir>
 
 #include <QDebug>
 #include <time.h>
@@ -35,16 +37,24 @@ QString reportSQLError(QSqlQuery query)
 
 bool MainWindow::createConnection()
 {
+/*
     db = QSqlDatabase::addDatabase("QMYSQL");
     db.setDatabaseName("PedometerLog");
     db.setConnectOptions();
-
+    db.setUserName("pedometer");    
+    db.setPassword("pedometer");    
+*/
+    db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName(qApp->applicationDirPath()
+                        + QDir::separator()
+                        + "pedometer.sqlite");
+                    
     if (!db.open()) {
         qDebug() << db.lastError().text();
 
         QMessageBox::critical(0, tr("Cannot open database"),
                               tr("Unable to establish a database connection.\n"
-                                 "This program needs MYSQL support.\n\n"
+                                 "This program needs Sqlite support.\n\n"
                                  "Click Cancel to exit."), QMessageBox::Cancel);
         return false;
     }
@@ -63,7 +73,7 @@ bool MainWindow::makeNotes(void) {
 
     query.prepare("SELECT * FROM notes");
     if (!query.exec()) {
-        if (query.lastError().number() != 1146) {
+        if (query.lastError().number() != -1) {
             reportSQLError(query);
             return false;
         } else {
