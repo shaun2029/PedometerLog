@@ -33,7 +33,9 @@ FORMS    += mainwindow.ui \
     notedialog.ui
 
 LIBS += -L/usr/lib64/qt4/plugins
-LIBS += -lusb
+LIBS += -lusb-1.0
+
+INCLUDEPATH += /usr/include/libusb-1.0
 
 QT += sql
 
