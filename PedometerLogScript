@@ -1,0 +1,13 @@
+#!/bin/bash
+#
+# This script is called by udev when a Crivit USB Pedometer is
+# plugged in/removed from the system.
+# It generates signals for the GUI based PedometerLog program.
+#
+PID=`pidof PedometerLog`
+if [ "$ACTION" == 'add' ]; then
+    /bin/kill -1 `/sbin/pidof PedometerLog`
+fi
+if [ "$ACTION" == 'remove' ]; then
+    /bin/kill -15 `/sbin/pidof PedometerLog`
+fi

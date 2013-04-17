@@ -1,0 +1,48 @@
+03-Mar-2013 Version 0.3.0 Released.
+
+	    Now that more data is getting collected, introduce some ways of mining the data, and restricting the amount of data displayed.
+	    Tools -> Configuration -> Hide Missing Days now allows missing days to be displayed or ignored. Prior to the modification, missing days were ignored.
+	    Tools -> Configuration -> Allow Data Mining. Selecting this option allows double clicking (with left mouse key) on a histogram column. This will select all data contained in that column, and expand it out into the next logical unit of time. e.g. In year view double click on 2012 and it expands into Jan, Feb, Mar ... etc. Double click on October expands to Week 40 thru Week 44, double click on Week 42 and it will expand to 15th Oct to 21st Oct. Double click an a day and it goes back to showing all data in year view. If you want to see all of September 2012, double click on 2012, then September, and while it shows the week view, select a "Daily" view from the drop down menu.
+
+12-Dec-2012 Version 0.2.2 Released
+
+	    Bug Fix. Left click a colomn and the reported maximum value was wrong by 1.
+
+07-Dec-2012 Version 0.2.1 Released
+
+	    Fix formatting of the Y Scale.
+	    Over 1 million steps no longer shows in scientific notation.
+	    Walking time is now days, hours, minutes.
+
+25-Oct-2012 Version 0.2.0 Released
+	    
+	    Future bug fix. Week number displays now also know about the year, so data will not be lost/combined when the year wraps.
+	    Introduce ability to add notes to a day, so it's possible to record why some days are a lot less (or more) than normal. Right click a day, and a popup window allows notes to be added, then subsequently displayed, editted or deleted. This notes adding stuff only works on the "Daily" display.
+	    Left clicking on a weekly display now additionally gives the start/end dates of the week.
+	    Y axis legend amended to be not overly large when graph fills screen.
+	    Tidy up code.
+	    If it looks like the X axis labels scribble over each other, leave out some to make room.
+	    Bug fix. The program used to remember your choice of X & Y scales, it doesn't work in 0.1.3, and may have broken even before that. Fix.
+
+09-Sep-2012 Version 0.1.3 Released
+
+	    Dialogs remember their size & position.
+	    Add some missing GNU licenses.
+	    Bug fix. Vectors were not resizing when more than 50 bars in graph.
+
+05-Sep-2012 Version 0.1.2 Released
+
+	    New dialog to allow change of graph colors.
+	    Bug fix to allow recalculate dialog to resize correctly.
+	    Steps plots now have over-target periods highlighted.
+
+25-Aug-2012 Version 0.1.1 Released
+
+	    New graph - METS
+	    New dialog to recalculate walked distance/kCal based on altered step size or weight.
+            Click on bargraph now gives the number of values in the bar and an average.
+	    Status message update when pedometer is removed.
+            Click a bargraph and it now displays the maximum value as a status message.
+	    Added a program icon.
+
+

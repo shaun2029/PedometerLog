@@ -1,0 +1,24 @@
+These are just basic instructions to get you up and running. I have the program running on Fedora 17 (Linux (3.6.7-4.fc17.x86_64) and it ran previously on Fedora 16 without any problems, but I'm not to sure about the way other systems are set up.
+
+The tarball will include the full sourcecode for Qt in the subdirectory. An executable is also included for those without Qt.
+
+1) You need to create an empty database. The program originally only had need of one table, this is created with the SQL script. When the program runs, it will detect the presence (or not) of other tables it requires and will create them on the fly. It has been done like this for people upgrading from earlier versions.
+
+To create an empty SQL database execute the following command from your ordinary user account.
+
+mysql < setup.sql
+
+When the program runs it will create the other tables it requires.
+
+If you get errors, then check you have the correct SQL privs. Do NOT execute this command as 'root', you need to be able to access the database from the GUI based program.
+
+2) The main GUI program can detect if your pedometer is plugged in when it runs, but it will not detect if the pedometer is plugged in or removed after the program starts. For that to happen, we need 'udev' to signal events to the running program and for that to happen we need two things, some rules for 'udev' and a script for 'udev' to run that will actually send signals to our GUI based program. You'll probably need to be 'root' to do this or sudo it. Assuming you have /usr/bin in your path, execute the following two commands to copy the files to the correct places. 
+
+cp -vp 94*.rules /etc/udev/rules.d
+cp -vp PedometerLogScript /usr/bin
+
+Good luck.
+
+
+
+

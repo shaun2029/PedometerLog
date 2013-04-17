@@ -1,8 +1,3 @@
-PedometerLog
-============
-
-To provide Linux support for the Crivit Z31192 pedometer.
-
 This is a GUI based version of the program.
 
 Essentially all the program does is download data from a Crivit Z31192 USB Pedometer, and display the data as a variety of graphs.

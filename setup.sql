@@ -1,0 +1,31 @@
+create database if not exists PedometerLog;
+use PedometerLog;
+/*
+create table if not exists pedometer_types
+	(name char(50) not null,
+         pedometer_key int auto_increment,
+         primary key (pedometer_key));
+
+create unique index pedometer_type_idx on pedometer_types (pedometer_key);
+create unique index pedometer_name_idx on pedometer_types (name);
+
+create table if not exists users
+        (name char(50) not null,
+         user_key int auto_increment,
+         pedometer_key int);
+
+create unique index user_key_idx on users (user_key);
+create unique index user_name_idx on users (name);
+*/
+create table if not exists log 
+	(date date not null,
+/*	timestamp datetime not null, */
+	steps int,
+	target int,
+	stepSize double,
+	weight double,
+        km double,
+        kcal double,
+        walkingtime double);
+
+create unique index date_idx on log (date);
