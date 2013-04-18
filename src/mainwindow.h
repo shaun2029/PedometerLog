@@ -59,6 +59,7 @@ private:
     bool openDb();
     bool createConnection();
 
+    bool makeLog();
     bool makeNotes();
     QString getDBNote(QString);
     void updDBNote(QString);

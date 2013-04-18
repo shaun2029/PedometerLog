@@ -71,6 +71,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     if (!createConnection())
         exit(1);
 
+    if (!makeLog())
+	exit(1);
+
     if (!makeNotes())
         exit(1);
 

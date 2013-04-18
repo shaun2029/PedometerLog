@@ -37,18 +37,23 @@ QString reportSQLError(QSqlQuery query)
 
 bool MainWindow::createConnection()
 {
-/*
-    db = QSqlDatabase::addDatabase("QMYSQL");
-    db.setDatabaseName("PedometerLog");
-    db.setConnectOptions();
-    db.setUserName("pedometer");    
-    db.setPassword("pedometer");    
-*/
     db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName(qApp->applicationDirPath()
-                        + QDir::separator()
-                        + "pedometer.sqlite");
-                    
+
+    QString path(QDir::home().path());
+    QDir dir(path);
+    path.append(QDir::separator()).append(".pedometerlog");
+
+    if ((!dir.exists(path)) && (!dir.mkdir(path))) {
+        QMessageBox::critical(0, tr("Cannot create database"),
+                              tr("Unable to create storage location.\n"
+                                  "Click Cancel to exit."), QMessageBox::Cancel);
+        return false;
+    }
+
+    path.append(QDir::separator()).append("pedometer.sqlite");
+    path = QDir::toNativeSeparators(path);
+    db.setDatabaseName(path);
+                   
     if (!db.open()) {
         qDebug() << db.lastError().text();
 
@@ -62,6 +67,38 @@ bool MainWindow::createConnection()
 }
 
 
+bool MainWindow::makeLog(void) {
+    /*
+      This routine is run everytime the program starts up, but will only ever do something
+      once. It creates the log table if required.
+      */
+
+    QSqlQuery query;
+
+    query.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='log';");
+
+    if (!query.exec()) {
+        reportSQLError(query);
+        return false;
+    } else if (!query.first()) {
+        query.prepare("create table if not exists log "
+              "(date date not null, steps int, target int, stepSize double, "
+              "weight double, km double, kcal double, walkingtime double);");
+
+        if (!query.exec()) {
+            reportSQLError(query);
+            return false;
+        }
+
+        query.prepare("create unique index date_idx on log (date);");
+        if (!query.exec()) {
+            reportSQLError(query);
+            return false;
+        }
+    }
+    return(true);
+}
+
 bool MainWindow::makeNotes(void) {
     /*
       This routine is run everytime the program starts up, but will only ever do something
@@ -71,24 +108,23 @@ bool MainWindow::makeNotes(void) {
 
     QSqlQuery query;
 
-    query.prepare("SELECT * FROM notes");
+    query.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='notes';");
+
     if (!query.exec()) {
-        if (query.lastError().number() != -1) {
+        reportSQLError(query);
+        return false;
+    } else if (!query.first()) {
+        query.prepare("create table if not exists notes (date date not null, note text)");
+
+        if (!query.exec()) {
             reportSQLError(query);
             return false;
-        } else {
-            query.prepare("create table if not exists notes (date date not null, note text)");
+        }
 
-            if (!query.exec()) {
-                reportSQLError(query);
-                return false;
-            }
-
-            query.prepare("create unique index notes_idx on notes (date);");
-            if (!query.exec()) {
-                reportSQLError(query);
-                return false;
-            }
+        query.prepare("create unique index notes_idx on notes (date);");
+        if (!query.exec()) {
+            reportSQLError(query);
+            return false;
         }
     }
     return(true);
