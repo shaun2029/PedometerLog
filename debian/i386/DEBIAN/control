@@ -1,0 +1,13 @@
+Package: pedometer-log
+Priority: optional
+Installed-Size: 519892
+Maintainer: Shaun Simpson <shauns2029@gmail.com>
+Architecture: i386 
+Version: 0.3
+Depends: libc6, libqtcore4, libqtgui4, libqt4-sql, libqt4-sql-sqlite, libusb-1.0-0 
+Description: Provides Linux support for the Crivit Z31192 pedometer.
+ This is a GUI based version of the program.
+ Essentially all the program does is download data from a 
+ Crivit Z31192 USB Pedometer, and display the data as a 
+ variety of graphs. Data can also be imported from .csv 
+ files.

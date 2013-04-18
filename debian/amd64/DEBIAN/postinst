@@ -1,0 +1,17 @@
+#!/bin/sh
+chown root:root /usr/bin/PedometerLog
+chown root:root /usr/bin/PedometerLogScript
+chown root:root /etc/udev/rules.d/94-PedometerLog.rules
+
+chmod 0755 /usr/bin/PedometerLog
+chmod 0755 /usr/bin/PedometerLogScript
+chmod 0644 /lib/udev/rules.d/94-PedometerLog.rules
+
+service udev restart
+
+
+
+
+
+
+    

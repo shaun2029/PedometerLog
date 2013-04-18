@@ -1,0 +1,6 @@
+#
+# Add a rule to allow me read/write access to the Crivit Z31192 pedometer.
+# Also add a rule to generate signals to the main program
+#
+SUBSYSTEMS=="usb", ACTION=="add", ATTRS{idVendor}=="0c45", ATTRS{idProduct}=="70c1", MODE="666", SYMLINK+="pedometer"
+ENV{ID_VENDOR_ID}=="0c45", ENV{ID_MODEL_ID}=="70c1", RUN+="/usr/bin/PedometerLogScript"

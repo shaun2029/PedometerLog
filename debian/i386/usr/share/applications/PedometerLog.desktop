@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=Pedometer Log
+GenericName=Pedometer Log
+Comment=Pedometer logging
+Keywords=Pedometer;
+Exec=PedometerLog
+Terminal=false
+Type=Application
+StartupNotify=true
+Icon=PedometerLog
+Categories=Utility;
+
+
