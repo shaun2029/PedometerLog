@@ -1,5 +1,6 @@
 PedometerLog
 ============
+Copyright Mike Davies 2013
 
 To provide Linux support for the Crivit Z31192 pedometer.
 
